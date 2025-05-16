@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     : ""; // Same origin for deployed frontend/backend on Render
 
 
-  fetch('${BASE_URL}/api/settings')
+  fetch(`${BASE_URL}/api/settings`)
     .then(response => {
       if (!response.ok) throw new Error("Server error");
       return response.json();
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const battalionSelect = document.getElementById("battalion");
       const campSelect = document.getElementById("camp");
 
-      fetch("${BASE_URL}/api/camps")
+      fetch(`${BASE_URL}/api/camps`)
         .then(response => response.json())
         .then(campData => {
           battalionSelect.addEventListener("change", () => {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const camp = formData.get("camp");
 
         try {
-          const res = await fetch('${BASE_URL}/api/registrations');
+          const res = await fetch(`${BASE_URL}/api/registrations`);
           const registrations = await res.json();
 
           const duplicate = registrations.find(
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
           }
 
-          await fetch('${BASE_URL}/api/register', {
+          await fetch(`${BASE_URL}/api/register`, {
             method: "POST",
             body: formData,
           });
@@ -88,3 +88,4 @@ document.addEventListener("DOMContentLoaded", () => {
     container.style.display = "block";
   });
 });
+
