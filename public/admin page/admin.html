@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div style="text-align: right; margin-bottom: 10px;">
+        <button onclick="logout()" style="background:#ff4d4d; color:white; border:none; padding:8px 14px; border-radius:6px; cursor:pointer;">Logout</button>
+  </div>
+  <a href="../register.html" class="corner-button">Main page</a>
+  <div class="container">
+    <h1>Admin Panel</h1>
+
+    <section style="display: flex; justify-content: center; margin-bottom: 30px;">
+        <label class="toggle">
+          <input type="checkbox" id="toggleReg">
+          <span class="slider"></span> Enable Registrations
+        </label>
+      </section>      
+
+    <section>
+      <h2>Add Camp</h2>
+      <form id="campForm">
+        <select id="campBattalion" required>
+          <option value="">Select Battalion</option>
+          <option value="2PB(R)">2PB BN</option>
+          <option value="2PB(G)">2PB BN</option>
+          <option value="8PB(R)">8PB BN</option>
+          <option value="8PB(F)">8PB BN</option>
+          <option value="1AIR">1-AIR PB BN</option>
+        </select>
+        <input type="text" id="campName" placeholder="Camp Name" required />
+        <button type="submit">Add Camp</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Existing Camps</h2>
+      <div id="campList"></div>
+    </section>
+
+    <section>
+      <h2>Registrations</h2>
+      <button id="downloadBtn">Download CSV</button>
+      <table id="regTable">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Full Name</th>
+            <th>Year</th>
+            <th>Enrollment</th>
+            <th>Reg No</th>
+            <th>Battalion</th>
+            <th>Camp</th>
+            <th>SD/SW</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html>

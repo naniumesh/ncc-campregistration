@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Admin Login</h2>
+
+     <!-- Left Logo -->
+     <img src="lpu logo.svg" alt="Left Logo" class="logo-left">
+
+     <!-- Right Logo -->
+     <img src="NCC logo.png" alt="Right Logo" class="logo-right">
+
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+
+    <div class="extra-buttons">
+      <a href="../register.html">Back to Home</a>
+    </div>
+
+    <button onclick="login()">Login</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>

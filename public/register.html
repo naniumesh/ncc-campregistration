@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container" id="registrationContainer">
+      <form id="registrationForm">
+      <div class="form-title-row">
+      <!-- Left Logo -->
+       <a href="login page/login.html">
+      <img src="FOR PAGE/NCC LOGO.png" alt="Left Logo" class="logo-left">
+      </a>
+
+      <h1>Cadet Registration</h1>
+
+      <!-- Right Logo -->
+      <img src="FOR PAGE/seal.svg" alt="Right Logo" class="logo-right">
+      </div>
+      
+      <label>Rank <input type="text" name="rank" required /></label>
+      <label>Full Name <input type="text" name="fullname" required /></label>
+      <label>Year
+        <select name="year" required>
+          <option value="">Select Year</option>
+          <option>2nd Year</option>
+          <option>3rd Year</option>
+        </select>
+      </label>
+      <label>
+        SD/SW
+        <select name="sd" required>
+          <option value="">Select</option>
+          <option value="SD">SD</option>
+          <option value="SW">SW</option>
+        </select>
+      </label>      
+      <label>Enrollment Number <input type="text" name="enroll" required /></label>
+      <label>Registration Number <input type="text" name="regnum" required /></label>
+      <label>
+        Battalion
+        <select name="battalion" id="battalion" required>
+          <option value="">Select Battalion</option>
+          <option value="2PB(R)">2PB BN (REGULAR)</option>
+          <option value="2PB(G)">2PB BN (GIRLS)</option>
+          <option value="8PB(R)">8PB BN (REGULAR)</option>
+          <option value="8PB(F)">8PB BN (FSFS)</option>
+          <option value="1AIR">1-AIR PB BN</option>
+        </select>
+      </label>
+      <label>
+        Camp
+        <select name="camp" id="camp" required>
+          <option value="">Select Camp</option>
+        </select>
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div id="thankYouMessage" style="display:none; text-align:center;">
+    <h2>Thank you for your submission!</h2>
+    <p>Your response has been saved.</p>
+    <button id="submitAgainBtn">Submit another response</button>
+  </div>
+  
+  <div class="closed" id="closedMessage" style="display:none;">
+    <h2>Registrations are Closed</h2>
+    <p>Please contact admin for more information.</p>
+  </div>
+
+  <div id="serverError" style="display:none; color: red; font-weight: bold; text-align: center;">
+    Server is not available. Please try again later.
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
