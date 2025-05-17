@@ -43,29 +43,47 @@
     </section>
 
     <section>
-      <h2>Registrations</h2>
-      <label for="campFilter">Filter by Camp: </label>
-      <select id="campFilter">
-        <option value="">-- All Camps --</option>
+      <h2>Filter Registrations</h2>
+    <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+      <select id="filterBattalion">
+        <option value="">All Battalions</option>
+        <option value="2PB(R)">2PB(R)</option>
+        <option value="2PB(G)">2PB(G)</option>
+        <option value="8PB(R)">8PB(R)</option>
+        <option value="8PB(F)">8PB(F)</option>
+        <option value="1AIR">1AIR</option>
       </select>
-      <button id="downloadBtn">Download CSV</button>
-      <table id="regTable">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Full Name</th>
-            <th>Year</th>
-            <th>Enrollment</th>
-            <th>Reg No</th>
-            <th>Battalion</th>
-            <th>Camp</th>
-            <th>SD/SW</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
+
+      <input type="text" id="filterCamp" placeholder="Filter by Camp Name" />
+
+      <button id="applyFilterBtn" style="background:#2b72ff; color:white;">Apply Filter</button>
+      <button id="resetFilterBtn" style="background:gray; color:white;">Reset</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Registrations</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Year</th>
+          <th>Enrollment</th>
+          <th>Reg No</th>
+          <th>Battalion</th>
+          <th>Camp</th>
+          <th>SD/SW</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="regTableBody">
+        <!-- Filled by JS -->
+      </tbody>
+    </table>
+
+    <button id="downloadBtn">Download Filtered CSV</button>
+  </section>
   </div>
   <script src="admin.js"></script>
 </body>
