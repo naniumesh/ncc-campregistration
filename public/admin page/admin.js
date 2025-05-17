@@ -1,4 +1,3 @@
-<script>
 const toggleReg = document.getElementById("toggleReg");
 const regTableBody = document.querySelector("#regTable tbody");
 const downloadBtn = document.getElementById("downloadBtn");
@@ -140,5 +139,3 @@ function logout() {
   localStorage.removeItem("isAdminLoggedIn");
   window.location.href = "../login page/login.html";
 }
-</script>
-
