@@ -1,236 +1,245 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f2f5;
-    color: #333;
-    padding: 30px;
-  }
-  
-  .container {
-    max-width: 1100px;
-    margin: auto;
-    background: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  }
-  
-  h1 {
-    text-align: center;
-    font-size: 2.2rem;
-    color: #2b72ff;
-    margin-bottom: 30px;
-  }
-  
-  section {
-    margin-bottom: 40px;
-  }
-  
-  h2 {
-    font-size: 1.4rem;
-    color: #333;
-    margin-bottom: 15px;
-    border-left: 5px solid #2b72ff;
-    padding-left: 10px;
-  }
-  
-  /* Toggle Switch */
-  .toggle {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 1.1rem;
-  }
-  
-  .toggle input {
-    display: none;
-  }
-  
-  .slider {
-    width: 50px;
-    height: 25px;
-    background: #ccc;
-    border-radius: 15px;
-    position: relative;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .slider::before {
-    content: "";
-    position: absolute;
-    width: 23px;
-    height: 23px;
-    border-radius: 50%;
-    background: white;
-    top: 1px;
-    left: 1px;
-    transition: 0.3s;
-  }
-  
-  input:checked + .slider {
-    background: #4caf50;
-  }
-  
-  input:checked + .slider::before {
-    transform: translateX(25px);
-  }
-  
-  /* Form Styling */
-  form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    align-items: center;
-  }
-  
-  form select,
-  form input[type="text"],
-  form button {
-    padding: 10px;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    flex: 1;
-  }
-  
-  form button {
-    background: #2b72ff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    flex: none;
-    padding: 10px 20px;
-  }
-  
-  form button:hover {
-    background: #1f5edb;
-  }
-  
-  /* Camp List Styling */
-  #campList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .badge {
-    background: #e0f0ff;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .badge button {
-    background: transparent;
-    border: none;
-    color: #ff3b3b;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  /* Table Styling */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    font-size: 14px;
-  }
-  
-  table th, table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-  
-  table th {
-    background-color: #f5f8fa;
-    color: #2b2b2b;
-    font-weight: 600;
-  }
-  
-  table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  table button {
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 13px;
-  }
-  
-  table button:hover {
-    background: #e63c3c;
-  }
-  
-  /* Download Button */
-  #downloadBtn {
-    background: #34a853;
-    color: #fff;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 15px;
-  }
-  
-  #downloadBtn:hover {
-    background: #279946;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    /*dashboard button*/
-  .corner-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  .corner-button:hover {
-    background-color: #45a049;
-  }
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  padding: 30px;
+}
 
+.container {
+  max-width: 1100px;
+  margin: auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
 
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #2b72ff;
+  margin-bottom: 30px;
+}
 
-  /* Buttons */
-  button {
-    font-size: 14px;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s;
-    margin: 10px 5px;
-  }
-  
-  button:hover {
-    opacity: 0.9;
-  }
-  
-  /* Logout Button */
-  div[style*="text-align: right"] {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-  }
+section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 15px;
+  border-left: 5px solid #2b72ff;
+  padding-left: 10px;
+}
+
+/* Toggle Switch */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.toggle input {
+  display: none;
+}
+
+.slider {
+  width: 52px;
+  height: 26px;
+  background: #ccc;
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+}
+
+input:checked + .slider {
+  background: #4caf50;
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+form select,
+form input[type="text"],
+form button {
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  flex: 1;
+}
+
+form button {
+  background: #2b72ff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  flex: none;
+  padding: 10px 20px;
+}
+
+form button:hover {
+  background: #1f5edb;
+}
+
+/* Camp List Styling */
+#campList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.badge {
+  background: #e0f0ff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s;
+}
+
+.badge:hover {
+  background: #cde5ff;
+}
+
+.badge button {
+  background: transparent;
+  border: none;
+  color: #ff3b3b;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+table th, table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+table th {
+  background-color: #f5f8fa;
+  color: #2b2b2b;
+  font-weight: 600;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+table button:hover {
+  background: #e63c3c;
+}
+
+/* Download Button */
+#downloadBtn {
+  background: #34a853;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s;
+}
+
+#downloadBtn:hover {
+  background: #279946;
+}
+
+/* Dashboard Button */
+.corner-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.corner-button:hover {
+  background-color: #45a049;
+}
+
+/* Buttons */
+button {
+  font-size: 14px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 10px 5px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Logout Button */
+div[style*="text-align: right"] {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
