@@ -243,11 +243,3 @@ div[style*="text-align: right"] {
   right: 20px;
   top: 20px;
 }
-
-/*added code*/
-#regTable tbody tr td[colspan="9"] {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  padding: 8px;
-}
-
