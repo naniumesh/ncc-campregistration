@@ -35,7 +35,7 @@ function loadRegistrations() {
 
       filtered.forEach(reg => {
         const tr = document.createElement("tr");
-        tr.innerHTML = 
+        tr.innerHTML = `
           <td>${reg.rank}</td>
           <td>${reg.fullname}</td>
           <td>${reg.year}</td>
@@ -45,7 +45,7 @@ function loadRegistrations() {
           <td>${reg.camp}</td>
           <td>${reg.sd || ''}</td>
           <td><button onclick="deleteRegistration('${reg._id}')">Delete</button></td>
-        ;
+        `;
         regTableBody.appendChild(tr);
       });
     });
@@ -53,7 +53,7 @@ function loadRegistrations() {
 
 // Delete registration
 window.deleteRegistration = function(id) {
-  fetch(/api/registrations/${id}, { method: "DELETE" }).then(() => loadRegistrations());
+  fetch(`/api/registrations/${id}`, { method: "DELETE" }).then(() => loadRegistrations());
 };
 
 // Download filtered CSV
@@ -74,7 +74,7 @@ downloadBtn.addEventListener("click", () => {
       const blob = new Blob([csv.map(r => r.join(",")).join("\n")], { type: "text/csv" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = selectedCamp ? ${selectedCamp}_registrations.csv : "all_registrations.csv";
+      a.download = selectedCamp ? `${selectedCamp}_registrations.csv` : "all_registrations.csv";
       a.click();
     });
 });
@@ -85,14 +85,14 @@ function renderCamps() {
     .then(res => res.json())
     .then(campData => {
       campList.innerHTML = "";
-      campFilter.innerHTML = <option value="">-- All Camps --</option>; // reset filter list
+      campFilter.innerHTML = `<option value="">-- All Camps --</option>`; // reset filter list
 
       Object.keys(campData).forEach(battalion => {
         campData[battalion].forEach(camp => {
           // Camp Badge
           const badge = document.createElement("div");
           badge.className = "badge";
-          badge.innerHTML = ${camp} (${battalion}) <button onclick="removeCamp('${battalion}', '${camp}')">x</button>;
+          badge.innerHTML = `${camp} (${battalion}) <button onclick="removeCamp('${battalion}', '${camp}')">x</button>`;
           campList.appendChild(badge);
 
           // Add to filter dropdown
