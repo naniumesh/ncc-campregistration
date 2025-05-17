@@ -5,10 +5,11 @@ const campForm = document.getElementById("campForm");
 const campList = document.getElementById("campList");
 const campBattalion = document.getElementById("campBattalion");
 const campName = document.getElementById("campName");
+const campFilter = document.getElementById("campFilter");
 
 // Load registration status
 fetch("/api/settings")
-  .then(response => response.json())
+  .then(res => res.json())
   .then(data => {
     toggleReg.checked = data.registrationEnabled;
   });
@@ -21,13 +22,18 @@ toggleReg.addEventListener("change", () => {
   }).then(() => alert("Registration state updated."));
 });
 
-// Load & render registrations
+// Load & render registrations (filtered)
 function loadRegistrations() {
+  const selectedCamp = campFilter.value;
   regTableBody.innerHTML = "";
   fetch("/api/registrations")
-    .then(response => response.json())
+    .then(res => res.json())
     .then(registrations => {
-      registrations.forEach((reg) => {
+      const filtered = selectedCamp
+        ? registrations.filter(reg => reg.camp === selectedCamp)
+        : registrations;
+
+      filtered.forEach(reg => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${reg.rank}</td>
@@ -45,41 +51,55 @@ function loadRegistrations() {
     });
 }
 
+// Delete registration
 window.deleteRegistration = function(id) {
-  fetch(`/api/registrations/${id}`, {
-    method: "DELETE",
-  }).then(() => loadRegistrations());
+  fetch(`/api/registrations/${id}`, { method: "DELETE" }).then(() => loadRegistrations());
 };
 
-// CSV Download
+// Download filtered CSV
 downloadBtn.addEventListener("click", () => {
+  const selectedCamp = campFilter.value;
   fetch("/api/registrations")
-    .then(response => response.json())
+    .then(res => res.json())
     .then(registrations => {
+      const filtered = selectedCamp
+        ? registrations.filter(r => r.camp === selectedCamp)
+        : registrations;
+
       const csv = [
         ["Rank", "Full Name", "Year", "Enrollment", "Reg No", "Battalion", "Camp", "SD/SW"],
-        ...registrations.map(r => [r.rank, r.fullname, r.year, r.enroll, r.regnum, r.battalion, r.camp, r.sd || ""])
+        ...filtered.map(r => [r.rank, r.fullname, r.year, r.enroll, r.regnum, r.battalion, r.camp, r.sd || ""])
       ];
+
       const blob = new Blob([csv.map(r => r.join(",")).join("\n")], { type: "text/csv" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = "registrations.csv";
+      a.download = selectedCamp ? `${selectedCamp}_registrations.csv` : "all_registrations.csv";
       a.click();
     });
 });
 
-// Camp handling (display only added camps)
+// Camp handling (display + populate filter)
 function renderCamps() {
   fetch("/api/camps")
-    .then(response => response.json())
+    .then(res => res.json())
     .then(campData => {
       campList.innerHTML = "";
+      campFilter.innerHTML = `<option value="">-- All Camps --</option>`; // reset filter list
+
       Object.keys(campData).forEach(battalion => {
-        campData[battalion].forEach((camp, index) => {
+        campData[battalion].forEach(camp => {
+          // Camp Badge
           const badge = document.createElement("div");
           badge.className = "badge";
           badge.innerHTML = `${camp} (${battalion}) <button onclick="removeCamp('${battalion}', '${camp}')">x</button>`;
           campList.appendChild(badge);
+
+          // Add to filter dropdown
+          const option = document.createElement("option");
+          option.value = camp;
+          option.textContent = camp;
+          campFilter.appendChild(option);
         });
       });
     });
@@ -94,6 +114,7 @@ window.removeCamp = function(battalion, camp) {
   }).then(() => renderCamps());
 };
 
+// Add new camp
 campForm.addEventListener("submit", e => {
   e.preventDefault();
   const battalion = campBattalion.value;
@@ -106,11 +127,15 @@ campForm.addEventListener("submit", e => {
     headers: { "Content-Type": "application/json" },
   }).then(() => renderCamps());
 });
+
+// Trigger reload on camp filter change
+campFilter.addEventListener("change", loadRegistrations);
+
 // Init
 loadRegistrations();
 renderCamps();
 
 function logout() {
-    localStorage.removeItem("isAdminLoggedIn");
-    window.location.href = "../login page/login.html";
-  }
+  localStorage.removeItem("isAdminLoggedIn");
+  window.location.href = "../login page/login.html";
+}
