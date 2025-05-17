@@ -25,7 +25,8 @@ toggleReg.addEventListener("change", () => {
 // Load & render registrations (filtered)
 function loadRegistrations() {
   const selectedCamp = campFilter.value;
-  regTableBody.innerHTML = "";
+  const regTableBody.innerHTML = "";
+  
   fetch("/api/registrations")
     .then(res => res.json())
     .then(registrations => {
@@ -33,21 +34,41 @@ function loadRegistrations() {
         ? registrations.filter(reg => reg.camp === selectedCamp)
         : registrations;
 
+      // Group by battalion and camp
+      const grouped = {};
       filtered.forEach(reg => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${reg.rank}</td>
-          <td>${reg.fullname}</td>
-          <td>${reg.year}</td>
-          <td>${reg.enroll}</td>
-          <td>${reg.regnum}</td>
-          <td>${reg.battalion}</td>
-          <td>${reg.camp}</td>
-          <td>${reg.sd || ''}</td>
-          <td><button onclick="deleteRegistration('${reg._id}')">Delete</button></td>
-        `;
-        regTableBody.appendChild(tr);
+        const key = `${reg.battalion} - ${reg.camp}`;
+        if (!grouped[key]) grouped[key] = [];
+        grouped[key].push(reg);
       });
+
+      // Clear table
+      tbody.innerHTML = "";
+
+      // Display each group
+      for (const groupKey in grouped) {
+        // Add group header row
+        const headerRow = document.createElement("tr");
+        headerRow.innerHTML = `<td colspan="9" style="background:#ddd; font-weight:bold;">${groupKey}</td>`;
+        tbody.appendChild(headerRow);
+        
+        // Add data rows
+        grouped[groupKey].forEach(reg => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${reg.rank}</td>
+            <td>${reg.fullname}</td>
+            <td>${reg.year}</td>
+            <td>${reg.enroll}</td>
+            <td>${reg.regnum}</td>
+            <td>${reg.battalion}</td>
+            <td>${reg.camp}</td>
+            <td>${reg.sd || ''}</td>
+            <td><button onclick="deleteRegistration('${reg._id}')">Delete</button></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
     });
 }
 
