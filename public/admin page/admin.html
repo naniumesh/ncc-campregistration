@@ -26,11 +26,11 @@
       <form id="campForm">
         <select id="campBattalion" required>
           <option value="">Select Battalion</option>
-          <option value="2PB(REGULAR)">2PB BN (REGULAR)</option>
-          <option value="2PB(GIRLS)">2PB BN (GIRLS)</option>
-          <option value="8PB(REGULAR)">8PB BN (REGULAR)</option>
-          <option value="8PB(FSFS)">8PB BN (FSFS)</option>
-          <option value="1-AIR PB BN">1-AIR PB BN</option>
+          <option value="2PB(R)">2PB BN</option>
+          <option value="2PB(G)">2PB BN</option>
+          <option value="8PB(R)">8PB BN</option>
+          <option value="8PB(F)">8PB BN</option>
+          <option value="1AIR">1-AIR PB BN</option>
         </select>
         <input type="text" id="campName" placeholder="Camp Name" required />
         <button type="submit">Add Camp</button>
@@ -43,47 +43,29 @@
     </section>
 
     <section>
-      <h2>Filter Registrations</h2>
-    <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
-      <select id="filterBattalion">
-          <option value="">Select Battalion</option>
-          <option value="2PB(REGULAR)">2PB BN (REGULAR)</option>
-          <option value="2PB(GIRLS)">2PB BN (GIRLS)</option>
-          <option value="8PB(REGULAR)">8PB BN (REGULAR)</option>
-          <option value="8PB(FSFS)">8PB BN (FSFS)</option>
-          <option value="1-AIR PB BN">1-AIR PB BN</option>
+      <h2>Registrations</h2>
+      <label for="campFilter">Filter by Camp: </label>
+      <select id="campFilter">
+        <option value="">-- All Camps --</option>
       </select>
-
-      <input type="text" id="filterCamp" placeholder="Filter by Camp Name" />
-
-      <button id="applyFilterBtn" style="background:#2b72ff; color:white;">Apply Filter</button>
-      <button id="resetFilterBtn" style="background:gray; color:white;">Reset</button>
-    </div>
-  </section>
-
-  <section>
-    <h2>Registrations</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Year</th>
-          <th>Enrollment</th>
-          <th>Reg No</th>
-          <th>Battalion</th>
-          <th>Camp</th>
-          <th>SD/SW</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="regTableBody">
-        <!-- Filled by JS -->
-      </tbody>
-    </table>
-
-    <button id="downloadBtn">Download Filtered CSV</button>
-  </section>
+      <button id="downloadBtn">Download CSV</button>
+      <table id="regTable">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Full Name</th>
+            <th>Year</th>
+            <th>Enrollment</th>
+            <th>Reg No</th>
+            <th>Battalion</th>
+            <th>Camp</th>
+            <th>SD/SW</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
   </div>
   <script src="admin.js"></script>
 </body>
