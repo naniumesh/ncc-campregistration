@@ -136,19 +136,19 @@ loadRegistrations();
 renderCamps();
 
 
-           // Check login status
-        if (localStorage.getItem("isAdminLoggedIn") !== "true") {
-            window.location.href = "./login page/login.html";
-        }
+// Check login status
+if (localStorage.getItem("isAdminLoggedIn") !== "true") {
+  window.location.href = "./login page/login.html";
+}
 
-        // Toggle menu
-        document.getElementById("menuToggle").addEventListener("click", function () {
-            const menu = document.getElementById("menuOptions");
-            menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
-        });
+// Toggle menu
+document.getElementById("menuToggle").addEventListener("click", function () {
+  const menu = document.getElementById("menuOptions");
+  menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
+});
 
-        // Logout
-        function logout() {
-            localStorage.removeItem("isAdminLoggedIn");
-            window.location.href = "./login page/login.html";
-        }
+// Logout
+function logout() {
+  localStorage.removeItem("isAdminLoggedIn");
+  window.location.href = "./login page/login.html";
+}
