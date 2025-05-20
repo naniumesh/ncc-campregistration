@@ -221,32 +221,47 @@ table button:hover {
 .corner-button:hover {
   background-color: #45a049;
 }
-
-/* Buttons */
-button {
-  font-size: 14px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-  margin: 10px 5px;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-/* Logout Button */
-div[style*="text-align: right"] {
+/* Logout Button (Top Right) */
+.logout-container {
   position: absolute;
   right: 20px;
   top: 20px;
 }
-
-#regTable tbody tr td[colspan="9"] {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  text-align: left;
-  padding: 10px;
+.logout-container button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+/* Menu Button (Top Left) */
+.menu-container {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+.menu-container button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: block;
+}
+.menu-options {
+  margin-top: 8px;
+  display: none;
+}
+.menu-options button {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 5px;
+  width: 100%;
 }
