@@ -18,7 +18,6 @@
     </button>
   </div>
   
-  <a href="../register.html" class="corner-button">Main page</a>
   <div class="container">
     <h1>Admin Panel</h1>
 
@@ -71,10 +70,25 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <tbody id="registrationsBody"></tbody>
+        </tbody>
       </table>
     </section>
   </div>
+  <!-- Left Menu Button -->
+        <div class="menu-container">
+          <button id="menuToggle">Main Pages</button>
+          <div class="menu-options" id="menuOptions">
+            <button onclick="window.location.href='https://lpunccwebsite.z29.web.core.windows.net/'">Website Home page</button>
+            <button onclick="window.location.href='https://ncc-campregistration-l6f6.onrender.com'">Registration Page</button>
+          </div>
+        </div>
+
+    <!-- Right Logout Button -->
+    <div class="logout-container">
+        <button onclick="logout()">Logout</button>
+    </div>
   <script src="admin.js"></script>
 </body>
 </html>
