@@ -6,16 +6,17 @@ const campList = document.getElementById("campList");
 const campBattalion = document.getElementById("campBattalion");
 const campName = document.getElementById("campName");
 const campFilter = document.getElementById("campFilter");
+const registrationsBody = document.getElementById("registrationsBody");
 
 // Load registration status
-fetch("/api/settings")
+fetch("https://ncc-campregistration-l6f6.onrender.com/api/settings")
   .then(res => res.json())
   .then(data => {
     toggleReg.checked = data.registrationEnabled;
   });
 
 toggleReg.addEventListener("change", () => {
-  fetch("/api/settings", {
+  fetch("https://ncc-campregistration-l6f6.onrender.com/api/settings", {
     method: "POST",
     body: JSON.stringify({ registrationEnabled: toggleReg.checked }),
     headers: { "Content-Type": "application/json" },
@@ -26,7 +27,7 @@ toggleReg.addEventListener("change", () => {
 function loadRegistrations() {
   const selectedCamp = campFilter.value;
   regTableBody.innerHTML = "";
-  fetch("/api/registrations")
+  fetch("https://ncc-campregistration-l6f6.onrender.com/api/registrations")
     .then(res => res.json())
     .then(registrations => {
       const filtered = selectedCamp
@@ -53,13 +54,13 @@ function loadRegistrations() {
 
 // Delete registration
 window.deleteRegistration = function(id) {
-  fetch(`/api/registrations/${id}`, { method: "DELETE" }).then(() => loadRegistrations());
+  fetch(`https://ncc-campregistration-l6f6.onrender.com/api/registrations/${id}`, { method: "DELETE" }).then(() => loadRegistrations());
 };
 
 // Download filtered CSV
 downloadBtn.addEventListener("click", () => {
   const selectedCamp = campFilter.value;
-  fetch("/api/registrations")
+  fetch("https://ncc-campregistration-l6f6.onrender.com/api/registrations")
     .then(res => res.json())
     .then(registrations => {
       const filtered = selectedCamp
@@ -81,7 +82,7 @@ downloadBtn.addEventListener("click", () => {
 
 // Camp handling (display + populate filter)
 function renderCamps() {
-  fetch("/api/camps")
+  fetch("https://ncc-campregistration-l6f6.onrender.com/api/camps")
     .then(res => res.json())
     .then(campData => {
       campList.innerHTML = "";
@@ -107,7 +108,7 @@ function renderCamps() {
 
 // Remove camp
 window.removeCamp = function(battalion, camp) {
-  fetch("/api/camps", {
+  fetch("https://ncc-campregistration-l6f6.onrender.com/api/camps", {
     method: "DELETE",
     body: JSON.stringify({ battalion, camp }),
     headers: { "Content-Type": "application/json" },
@@ -121,7 +122,7 @@ campForm.addEventListener("submit", e => {
   const camp = campName.value.trim();
   if (!battalion || !camp) return;
 
-  fetch("/api/camps", {
+  fetch("https://ncc-campregistration-l6f6.onrender.com/api/camps", {
     method: "POST",
     body: JSON.stringify({ battalion, camp }),
     headers: { "Content-Type": "application/json" },
@@ -136,17 +137,17 @@ loadRegistrations();
 renderCamps();
 
 
+
+
 // Check login status
 if (localStorage.getItem("isAdminLoggedIn") !== "true") {
   window.location.href = "./login page/login.html";
 }
-
 // Toggle menu
 document.getElementById("menuToggle").addEventListener("click", function () {
   const menu = document.getElementById("menuOptions");
   menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
 });
-
 // Logout
 function logout() {
   localStorage.removeItem("isAdminLoggedIn");
