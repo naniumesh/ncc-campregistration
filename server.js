@@ -7,7 +7,7 @@ const multer = require("multer");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
-const session = require("express-session");
+const bcrypt = require("bcrypt");
 
 const app = express();
 
@@ -17,19 +17,24 @@ app.use(bodyParser.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join(__dirname, "public"))); // Serve frontend
 
-// Default route to load registration page
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "register.html"));
-});
-
-mongoose.connect(process.env.MONGO_URI, {
+// Connect to Registration DB
+const regDb = mongoose.createConnection(process.env.MONGO_REG_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).then(() => console.log("MongoDB connected"))
-  .catch(err => console.error("MongoDB connection error:", err));
+});
+regDb.on("connected", () => console.log("✅ Registration DB connected"));
+regDb.on("error", err => console.error("❌ Registration DB error:", err));
 
-// MongoDB Models
-const Registration = mongoose.model("Registration", new mongoose.Schema({
+// Connect to Login DB
+const loginDb = mongoose.createConnection(process.env.MONGO_LOGIN_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+loginDb.on("connected", () => console.log("✅ Login DB connected"));
+loginDb.on("error", err => console.error("❌ Login DB error:", err));
+
+// Models for Registration System
+const Registration = regDb.model("Registration", new mongoose.Schema({
   rank: String,
   fullname: String,
   year: String,
@@ -41,25 +46,82 @@ const Registration = mongoose.model("Registration", new mongoose.Schema({
   image: String,
 }));
 
-const Setting = mongoose.model("Setting", new mongoose.Schema({
+const Setting = regDb.model("Setting", new mongoose.Schema({
   registrationEnabled: Boolean,
 }));
 
-const CampData = mongoose.model("CampData", new mongoose.Schema({
+const CampData = regDb.model("CampData", new mongoose.Schema({
   battalion: String,
   camp: String,
 }));
 
+// Model for Login System
+const LoginUser = loginDb.model("LoginUser", new mongoose.Schema({
+  username: String,
+  password: String, // hashed
+}));
+
+// Default route to load registration page
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "register.html"));
+});
+
+// ------------------- LOGIN SYSTEM -------------------
+
+// Login
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+  const user = await LoginUser.findOne({ username });
+
+  if (!user) return res.status(401).json({ success: false, message: "User not found." });
+
+  const match = await bcrypt.compare(password, user.password);
+  if (match) {
+    res.json({ success: true });
+  } else {
+    res.status(401).json({ success: false, message: "Invalid password." });
+  }
+});
+
+// Add User
+app.post("/api/add-user", async (req, res) => {
+  const { username, password } = req.body;
+
+  const exists = await LoginUser.findOne({ username });
+  if (exists) return res.status(409).json({ message: "User already exists" });
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  await LoginUser.create({ username, password: hashedPassword });
+
+  res.json({ success: true });
+});
+
+// Get All Users
+app.get("/api/users", async (req, res) => {
+  const users = await LoginUser.find({}, { password: 0 });
+  res.json(users);
+});
+
+// Remove User
+app.delete("/api/users/:username", async (req, res) => {
+  const result = await LoginUser.deleteOne({ username: req.params.username });
+  if (result.deletedCount > 0) {
+    res.json({ success: true });
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+
+// ------------------- REGISTRATION SYSTEM -------------------
+
 // Multer setup
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads"),
-  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
+  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
 });
 const upload = multer({ storage });
 
-// APIs
-
-// Settings
+// Registration Settings
 app.get("/api/settings", async (req, res) => {
   let setting = await Setting.findOne();
   if (!setting) {
@@ -90,6 +152,7 @@ app.get("/api/camps", async (req, res) => {
   });
   res.json(grouped);
 });
+
 app.post("/api/camps", async (req, res) => {
   const { battalion, camp } = req.body;
   const exists = await CampData.findOne({ battalion, camp });
@@ -111,37 +174,26 @@ app.delete("/api/camps", async (req, res) => {
   }
 });
 
-// Registrations APIS
+// Registrations
 app.post("/api/register", upload.single("image"), async (req, res) => {
-    try {
-      console.log("Received registration request with body:", req.body);
-      console.log("Uploaded file:", req.file);
-  
-      const {
-        rank, fullname, year, enroll,
-        regnum, battalion, camp, sd
-      } = req.body;
-  
-      const newReg = new Registration({
-        rank,
-        fullname,
-        year,
-        enroll,
-        regnum,
-        battalion,
-        camp,
-        sd,
-        image: req.file ? req.file.path : "",
-      });
-  
-      const saved = await newReg.save();
-      console.log("Saved to MongoDB:", saved);
-      res.json({ success: true });
-    } catch (err) {
-      console.error("Registration error:", err);
-      res.status(500).json({ success: false, error: err.message });
-    }
-  });  
+  try {
+    const {
+      rank, fullname, year, enroll,
+      regnum, battalion, camp, sd
+    } = req.body;
+
+    const newReg = new Registration({
+      rank, fullname, year, enroll,
+      regnum, battalion, camp, sd,
+      image: req.file ? req.file.path : "",
+    });
+
+    const saved = await newReg.save();
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 app.get("/api/registrations", async (req, res) => {
   const data = await Registration.find();
@@ -153,7 +205,7 @@ app.delete("/api/registrations/:id", async (req, res) => {
   res.sendStatus(200);
 });
 
+// ------------------- START SERVER -------------------
 
-// Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`));
