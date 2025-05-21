@@ -141,7 +141,7 @@ renderCamps();
 
 // Check login status
 if (localStorage.getItem("isAdminLoggedIn") !== "true") {
-  window.location.href = "../login page/login.html";
+  window.location.href = "https://login-page-6jzv.onrender.com";
 }
 // Toggle menu
 document.getElementById("menuToggle").addEventListener("click", function () {
@@ -151,5 +151,5 @@ document.getElementById("menuToggle").addEventListener("click", function () {
 // Logout
 function logout() {
   localStorage.removeItem("isAdminLoggedIn");
-  window.location.href = "../login page/login.html";
+  window.location.href = "https://login-page-6jzv.onrender.com";
 }
