@@ -265,3 +265,74 @@ table button:hover {
   margin-bottom: 5px;
   width: 100%;
 }
+
+/* Responsive Styles for Mobile View */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  form select,
+  form input[type="text"],
+  form button {
+    width: 100%;
+    flex: none;
+  }
+
+  .toggle {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1rem;
+  }
+
+  #campList {
+    flex-direction: column;
+  }
+
+  table {
+    font-size: 13px;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+  }
+
+  .corner-button,
+  .logout-container,
+  .menu-container {
+    position: static;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  .logout-container button,
+  .menu-container button {
+    width: 100%;
+  }
+
+  .menu-options button {
+    width: 100%;
+  }
+
+  #downloadBtn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
