@@ -1,3 +1,10 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const isLoggedIn = sessionStorage.getItem("isAdminLoggedIn");
+  if (!isLoggedIn) {
+    window.location.href = "https://login-page-6jzv.onrender.com"; // redirect if not logged in
+  }
+});
+
 const toggleReg = document.getElementById("toggleReg");
 const regTableBody = document.querySelector("#regTable tbody");
 const downloadBtn = document.getElementById("downloadBtn");
