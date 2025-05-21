@@ -1,15 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const isLoggedIn = sessionStorage.getItem("isAdminLoggedIn");
-  const adminType = sessionStorage.getItem("adminType");
-
-  // Redirect back to login if not logged in or admin type mismatch
-  if (!isLoggedIn || adminType !== "camp") {
-    alert("Access denied. Please log in.");
-    window.location.href = "../login page/login.html";
-  }
-});
-
-
 const toggleReg = document.getElementById("toggleReg");
 const regTableBody = document.querySelector("#regTable tbody");
 const downloadBtn = document.getElementById("downloadBtn");
