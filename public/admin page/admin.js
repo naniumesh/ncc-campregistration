@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Redirect back to login if not logged in or admin type mismatch
   if (!isLoggedIn || adminType !== "camp") {
     alert("Access denied. Please log in.");
-    window.location.href = "/login.html";
+    window.location.href = "../login page/login.html";
   }
 });
 
