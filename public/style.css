@@ -1,3 +1,12 @@
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Segoe UI", sans-serif;
   background: linear-gradient(
@@ -14,6 +23,7 @@ body {
   margin: 0;
 }
 
+/* Main container */
 .container {
   background: white;
   padding: 30px;
@@ -25,6 +35,7 @@ body {
   position: relative;
 }
 
+/* Form styling */
 #registrationForm {
   position: relative;
   border: 1px solid #ccc;
@@ -55,6 +66,7 @@ body {
   text-align: center;
 }
 
+/* Input fields */
 form label {
   display: block;
   margin-bottom: 15px;
@@ -68,6 +80,7 @@ input, select {
   font-size: 14px;
 }
 
+/* Button */
 button {
   background: #2b72ff;
   color: white;
@@ -83,45 +96,17 @@ button:hover {
   background: #1f5edb;
 }
 
+/* Messages */
 .closed {
   text-align: center;
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 20px;
-  }
-
-  .form-title-row {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-  }
-
-  .form-title-row h1 {
-    font-size: 1.5em;
-  }
-
-  .logo-left, .logo-right {
-    height: 45px;
-  }
-
-  form label {
-    margin-bottom: 10px;
-  }
-
-  input, select {
-    font-size: 15px;
-    padding: 8px;
-  }
-
-  button {
-    font-size: 15px;
-    padding: 10px;
-  }
-
-  #thankYouMessage, #closedMessage, #serverError {
-    padding: 20px;
-    font-size: 16px;
-  }
+#thankYouMessage,
+#closedMessage,
+#serverError {
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 100%;
 }
