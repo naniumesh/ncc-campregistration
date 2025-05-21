@@ -153,7 +153,7 @@ renderCamps();
 
 // Check login status
 if (localStorage.getItem("isAdminLoggedIn") !== "true") {
-  window.location.href = "https://login-l1d4.onrender.com/";
+  window.location.href = "../login page/login.html";
 }
 // Toggle menu
 document.getElementById("menuToggle").addEventListener("click", function () {
@@ -163,5 +163,5 @@ document.getElementById("menuToggle").addEventListener("click", function () {
 // Logout
 function logout() {
   localStorage.removeItem("isAdminLoggedIn");
-  window.location.href = "https://login-l1d4.onrender.com/";
+  window.location.href = "../login page/login.html";
 }
