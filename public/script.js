@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Dynamically detect backend URL (helpful for Render deployment)
   const BASE_URL = location.hostname.includes("localhost")
     ? "https://ncc-campregistration-l6f6.onrender.com"
-    : ""; // Same origin for deployed frontend/backend on Render
+    : "https://ncc-campregistration-l6f6.onrender.com"; // Same origin for deployed frontend/backend on Render
 
 
   fetch(`${BASE_URL}/api/settings`)
