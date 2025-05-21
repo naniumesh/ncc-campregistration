@@ -149,4 +149,11 @@ document.getElementById("menuToggle").addEventListener("click", function () {
 function logout() {
   sessionStorage.removeItem("isAdminLoggedIn"); // not localStorage
   window.location.href = "https://login-page-6jzv.onrender.com";
+  alert("Logging out...");
 }
+
+
+
+
+
+
