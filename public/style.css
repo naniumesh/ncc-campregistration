@@ -86,4 +86,42 @@ button:hover {
 .closed {
   text-align: center;
 }
-  
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  .form-title-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .form-title-row h1 {
+    font-size: 1.5em;
+  }
+
+  .logo-left, .logo-right {
+    height: 45px;
+  }
+
+  form label {
+    margin-bottom: 10px;
+  }
+
+  input, select {
+    font-size: 15px;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  #thankYouMessage, #closedMessage, #serverError {
+    padding: 20px;
+    font-size: 16px;
+  }
+}
